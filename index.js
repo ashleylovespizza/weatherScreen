@@ -5,15 +5,14 @@ var SerialPort = require("serialport").SerialPort;
 
 
 var weatherStr = "No Pants Island LLC\n \n ";
-
 // initialize weather in case nothin comes in
 var screenStr = "";
 
 
-
 // ttyAMA0 is the port our serial screen lives on
 var sp = new SerialPort("/dev/ttyAMA0", {
-  baudrate: 19200
+  baudrate: 19200,
+  parser: serialport.parsers.readline("\n")
 });
 
 // api call to get some weather data for Somerville, MA
@@ -65,10 +64,11 @@ function getNewWeatherRequest() {
   req.end();
 
 
-  if (!sp.isOpen()) {
-    // serial port not open, open that bitch up
-    sp.open();
-  }
+  // if (!sp.isOpen()) {
+  //   console.log("get new weather request serial port open");
+  //   // serial port not open, open that bitch up
+  //   sp.open();
+  // }
   
 
 
