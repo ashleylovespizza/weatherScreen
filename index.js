@@ -81,7 +81,7 @@ sp.write(screenStr, function(err, results) {
       console.log('results ' + results);
     });
   } else {
-    sp.open(, function(err) {
+    sp.open(function(err) {
          console.log("NOWWWWW IS OPEN");
     screenStr = moment().format("dd MMM D YYYY HH:mm");
 console.log("MOMENT: "+moment().format("dd MMM D YYYY HH:mm"));
