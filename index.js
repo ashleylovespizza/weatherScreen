@@ -6,6 +6,9 @@ var SerialPort = require("serialport").SerialPort;
 
 var weatherStr = "No Pants Island LLC\n \n ";
 
+// initialize weather in case nothin comes in
+var screenStr = "";
+
 
 function screenStr() {
   // first line - date
@@ -14,9 +17,9 @@ function screenStr() {
   return screenStr;
 }
 
-
 // initialize weather in case nothin comes in
 var screenStr = screenStr();
+
 
 
 // ttyAMA0 is the port our serial screen lives on
