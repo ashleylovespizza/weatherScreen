@@ -2,10 +2,9 @@ var http = require('http');
 var moment= require('moment');
 var SerialPort = require("serialport").SerialPort;
 
-// initialize weather in case nothin comes in
-var screenStr = screenStr();
-var weatherStr = "No Pants Island LLC\n \n ";
 
+
+var weatherStr = "No Pants Island LLC\n \n ";
 
 
 function screenStr() {
@@ -14,6 +13,10 @@ function screenStr() {
   screenStr += "\n" + weatherStr;
   return screenStr;
 }
+
+
+// initialize weather in case nothin comes in
+var screenStr = screenStr();
 
 
 // ttyAMA0 is the port our serial screen lives on
@@ -71,7 +74,8 @@ function getNewWeatherRequest() {
 
 
   if (sp.isOpen()) {
-    sp.write(screenStr(), function(err, results) {
+    screenStr()
+    sp.write(screenStr, function(err, results) {
       console.log('err ' + err);
       console.log('results ' + results);
     });
@@ -89,7 +93,8 @@ setInterval(getNewWeatherRequest, 1000*60*15);
 
 sp.on("open", function() {
   console.log("serial open");
-  sp.write(screenStr(), function(err, results) {
+  screenStr();
+  sp.write(screenStr, function(err, results) {
     console.log('err ' + err);
     console.log('results ' + results);
     });
