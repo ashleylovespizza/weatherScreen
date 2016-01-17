@@ -88,7 +88,7 @@ sp.on("open", function() {
   console.log("WRITE THIS: ");
   console.log(screenStr);
   
-  sp.write("YO DAWG", function(err, results) {
+  sp.write("hihihi", function(err, results) {
     console.log('err ' + err);
     console.log('results ' + results);
   });
