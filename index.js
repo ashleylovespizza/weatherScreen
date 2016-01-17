@@ -10,17 +10,6 @@ var weatherStr = "No Pants Island LLC\n \n ";
 var screenStr = "";
 
 
-function screenStr() {
-  // first line - date
-  screenStr = moment().format('dd MMM D YYYY HH:mm');
-
-  screenStr += "\n" + weatherStr;
-}
-
-// initialize weather in case nothin comes in
-//screenStr();
-
-
 
 // ttyAMA0 is the port our serial screen lives on
 var sp = new SerialPort("/dev/ttyAMA0", {
@@ -75,11 +64,15 @@ function getNewWeatherRequest() {
   req.write('data\n');
   req.end();
 
+  console.log("get new weather request fn - weather str:");
+  console.log(weatherStr);
+
+  console.log("OPEN??? "+ sp.isOpen());
 
   if (sp.isOpen()) {
   //  screenStr()
-    
-  screenStr = moment().format("dd MMM D YYYY HH:mm");
+    console.log("IS OPEN");
+    screenStr = moment().format("dd MMM D YYYY HH:mm");
 console.log("MOMENT: "+moment().format("dd MMM D YYYY HH:mm"));
   screenStr += "\n" + weatherStr;
 
@@ -99,14 +92,14 @@ setInterval(getNewWeatherRequest, 1000*60*15);
 
 
 
-sp.on("open", function() {
-  console.log("serial open");
-//  screenStr();
-  screenStr = moment().format('dd MMM D YYYY HH:mm');
-  screenStr += "\n" + weatherStr;
+// sp.on("open", function() {
+//   console.log("serial open");
+// //  screenStr();
+//   screenStr = moment().format('dd MMM D YYYY HH:mm');
+//   screenStr += "\n" + weatherStr;
   
-sp.write(screenStr, function(err, results) {
-    console.log('err ' + err);
-    console.log('results ' + results);
-    });
-});
+// sp.write(screenStr, function(err, results) {
+//     console.log('err ' + err);
+//     console.log('results ' + results);
+//     });
+// });
