@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "moment": "^2.11.1"
+    "moment": "^2.11.1",
+    "serialport": "^2.0.6"
   }
 }

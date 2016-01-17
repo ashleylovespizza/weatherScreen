@@ -37,3 +37,17 @@ function getNewWeatherRequest() {
 getNewWeatherRequest();
 // every 15 minutes, get new weather
 setInterval(getNewWeatherRequest, 1000*60*15);
+
+var SerialPort = require("serialport").SerialPort
+
+
+var sp = new SerialPort("/dev/ttyAMA0", {
+  baudrate: 19200
+});
+sp.on("open", function() {
+	console.log("serial open");
+	sp.write("hello world", function(err, results) {
+		console.log('err ' + err);
+		console.log('results ' + results);
+  	});
+});
