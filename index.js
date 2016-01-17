@@ -7,6 +7,15 @@ var screenStr = screenStr();
 var weatherStr = "No Pants Island LLC\n \n ";
 
 
+
+function screenStr() {
+  // first line - date
+  screenStr = moment().format('dd MMM D YYYY HH:mm');
+  screenStr += "\n" + weatherStr;
+  return screenStr;
+}
+
+
 // ttyAMA0 is the port our serial screen lives on
 var sp = new SerialPort("/dev/ttyAMA0", {
   baudrate: 19200
@@ -80,16 +89,8 @@ setInterval(getNewWeatherRequest, 1000*60*15);
 
 sp.on("open", function() {
   console.log("serial open");
-  sp.write(screenStr, function(err, results) {
+  sp.write(screenStr(), function(err, results) {
     console.log('err ' + err);
     console.log('results ' + results);
     });
 });
-
-
-function screenStr() {
-  // first line - date
-  screenStr = moment().format('dd MMM D YYYY HH:mm');
-  screenStr += "\n" + weatherStr;
-  return screenStr;
-}
